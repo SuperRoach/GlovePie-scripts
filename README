@@ -1,0 +1,15 @@
+A collection of script(s) to make GlovePie more useful. I am focusing on the popular Wiimote.
+
+	- XSplit-pieceof.pie
+A interface using a wiimote for using XSplit. 
+
+Features:
+The directional buttons control what scene you are viewing, with the LED indicating what scene you are on 
+(you are needed to set the hotkeys in the script to match your assigned hotkeys in XSplit).
+
+If you are doing using a two pc style setup for recording, or the XSplit window open, it will check the current recording status,
+Rumbling in different ways as a subtle indicator of recording started or stopped. 
+
+Buttons 1/2 are mapped to mouse clicks when used as a teleprompter or for slides.
+
+Optional pacing feature to have the LEDs blink at a defined interval for practicing timing an rehearsals.

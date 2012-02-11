@@ -1,0 +1,203 @@
+// XSplit helper Script, Wiimote, By SuperRoach/Brett James
+// https://github.com/SuperRoach/GlovePie-scripts      /      http://brettjamesonline.com
+// Rev 1.0
+
+/* 
+	Controls: 
+	The idea of this script is to help control xsplit presentations easier.
+	The directional pad on a wiimote is mapped to scene changes (4)
+	While the One and Two buttons are mapped to emulate the mouse clicks (Left and right) 
+	to change presentation slides and ingame spectator.
+	
+	Scoreboard checking can be done with the Trigger (B) button.
+	
+	The directional buttons will show you what was the last scene was incase you forget via the LED indicators.
+	
+	The A, Plus and Minus Keys are free to map a function too, which could be good for push to talk.
+*/
+
+// This is the button used to Start and stop recording (Mapped to home button)
+Control+Alt+Shift+S		= var.ToggleRecording
+
+// The Scenes used on the directional pad
+Control+Alt+Shift+Q 	= wiimote.Up
+Control+Alt+Shift+W		= wiimote.Left
+Control+Alt+Shift+E		= wiimote.Down
+Control+Alt+Shift+A		= wiimote.Right
+
+
+mouse.LeftButton		= wiimote.One
+mouse.RightButton		= wiimote.Two
+tab						= wiimote.B
+
+// Uncomment or change these as you need
+// alt+tab				= wiimote.A
+// VolumeUp				= wiimote.Plus
+// VolumeDown			= wiimote.Minus
+
+//	
+//	
+
+
+// What type of light we should use for the 
+var.Recording	= 12
+var.LedStatus   = 0
+var.CheckRate	= 10
+
+
+
+
+var.Pacing = false   // If this is enabled, a brief rumble will occur for each minute to help practice your timing.
+var.PaceTime = 60 Seconds // the amount between prompting.
+
+pie.FrameRate = 15hz 
+var.ToggleRecording = wiimote.Home
+
+
+if Wiimote.Up then
+   Wiimote.Led1=true
+   Wiimote.Led2=false
+   Wiimote.Led3=false
+   Wiimote.Led4=false
+   var.LedStatus = Wiimote.Leds
+   wait 500ms
+end
+
+if Wiimote.left then
+   Wiimote.Led1=false
+   Wiimote.Led2=true
+   Wiimote.Led3=false
+   Wiimote.Led4=false
+   var.LedStatus = Wiimote.Leds
+   wait 500ms
+end
+
+if Wiimote.Down then
+   Wiimote.Led1=false
+   Wiimote.Led2=false
+   Wiimote.Led3=true
+   Wiimote.Led4=false
+   var.LedStatus = Wiimote.Leds
+   wait 500ms
+end
+
+if Wiimote.Right then
+   Wiimote.Led1=false
+   Wiimote.Led2=false
+   Wiimote.Led3=false
+   Wiimote.Led4=true
+   var.LedStatus = Wiimote.Leds
+   wait 500ms
+end
+
+if var.Pacing then
+	wait var.PaceTime
+	var.LedStatus = Wiimote.Leds
+	Wiimote.Leds = 12
+	wait 500ms
+	Wiimote.Leds = var.LedStatus
+end
+
+if var.ToggleRecording then
+	wait 200ms
+	//debug = Window.Title 
+	
+	// If the XSplit window has focus, attempt to check its status.
+	// Note for very short recordings, the notification window will obfuscate this status.
+	if  Window.BeforeDash = "Acquiring stream configuration"
+		debug = "We have detected you to begin recording."
+		Wiimote.Rumble = true
+		wait 25ms
+		Wiimote.Rumble=false
+	elseif Window.BeforeDash = "XSplit Broadcaster"
+		debug = "We have detected you to have finished recording."
+		Wiimote.Rumble = true
+		wait 40ms
+		Wiimote.Rumble = false
+		wait 120ms
+		Wiimote.Rumble = true
+		wait 40ms
+		Wiimote.Rumble = false
+	else 
+		debug = "Unable to determine recording status"
+	end
+	
+	// Regardless of the grabbed status, we still want to blink
+	var.LedStatus = Wiimote.Leds
+	Wiimote.leds = 16
+	wait 200 ms
+	Wiimote.leds = 15
+	wait 1200 ms
+	Wiimote.Leds = var.LedStatus
+end
+
+
+if starting then
+ var.init=false
+ Wiimote.Rumble = true
+ wait 50ms
+ Wiimote.Rumble=false
+
+   Wiimote.Led1=false
+   Wiimote.Led2=false
+   Wiimote.Led3=false
+   Wiimote.Led4=false
+	wait 50ms
+   Wiimote.Led1=true
+   Wiimote.Led2=false
+   Wiimote.Led3=false
+   Wiimote.Led4=false
+	wait 50ms
+   Wiimote.Led1=false
+   Wiimote.Led2=true
+   Wiimote.Led3=false
+   Wiimote.Led4=false
+	wait 50ms
+   Wiimote.Led1=false
+   Wiimote.Led2=false
+   Wiimote.Led3=true
+   Wiimote.Led4=false
+	wait 50ms
+   Wiimote.Led1=false
+   Wiimote.Led2=false
+   Wiimote.Led3=false
+   Wiimote.Led4=true
+    wait 50ms
+   Wiimote.Led1=false
+   Wiimote.Led2=false
+   Wiimote.Led3=false
+   Wiimote.Led4=false
+	wait 50ms
+   Wiimote.Led1=true
+   Wiimote.Led2=true
+   Wiimote.Led3=true
+   Wiimote.Led4=true
+   // init end 
+   
+   // Let user know if pacing is on
+	if var.pacing = true then
+	   Wiimote.Led1=true
+	   Wiimote.Led2=true
+	   Wiimote.Led3=true
+	   Wiimote.Led4=false
+	   wait 100ms   
+	   Wiimote.Led1=true
+	   Wiimote.Led2=true
+	   Wiimote.Led3=true
+	   Wiimote.Led4=true
+	   wait 100ms   
+	   Wiimote.Led1=true
+	   Wiimote.Led2=true
+	   Wiimote.Led3=true
+	   Wiimote.Led4=false
+	   wait 100ms   
+	   Wiimote.Led1=true
+	   Wiimote.Led2=true
+	   Wiimote.Led3=true
+	   Wiimote.Led4=true
+	   wait 100ms
+	end
+ 
+ 
+	// At this point all lights are on, waiting for a press.
+ end
