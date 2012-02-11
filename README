@@ -1,4 +1,5 @@
-A collection of script(s) to make GlovePie more useful. I am focusing on the popular Wiimote.
+A collection of script(s) to make GlovePie more useful. 
+I am focusing on the popular Wiimote for the interface.
 
 	- XSplit-pieceof.pie
 A interface using a wiimote for using XSplit. 
@@ -13,3 +14,13 @@ Rumbling in different ways as a subtle indicator of recording started or stopped
 Buttons 1/2 are mapped to mouse clicks when used as a teleprompter or for slides.
 
 Optional pacing feature to have the LEDs blink at a defined interval for practicing timing an rehearsals.
+
+
+	- Use
+- Get Glovepie from:	
+http://glovepie.org/ (recommend 0.43 if you want to avoid bloat from Kinect SDK)
+
+- Add the wiimote to your bluetooh equipped PC (crash course: bluetooth - add device, 
+hold 1+2 to make it discoverable, add wiimote without a passkey)
+
+- Using GlovePie, open a script and Click "Start".  The leds should change, and be functional now.
